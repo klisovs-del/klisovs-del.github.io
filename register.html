@@ -33,6 +33,33 @@
             </div>
             <button type="submit" class="submit-btn">Зареєструватися</button>
         </form>
+        <script src="assets/script.js"></script>
+<script>
+  // наповнюємо select курсів на основі каталогу
+  window.addEventListener('DOMContentLoaded', () => {
+    const select = document.getElementById('course');
+    if (typeof COURSES === 'undefined') return;
+    const grouped = {};
+    CATEGORY_ORDER.forEach(c => grouped[c] = []);
+    COURSES.forEach(c => { (grouped[c.category] ||= []).push(c); });
+    Object.entries(grouped).forEach(([cat, list]) => {
+      if (!list.length) return;
+      const og = document.createElement('optgroup');
+      og.label = cat;
+      list.forEach(c => {
+        const opt = document.createElement('option');
+        opt.textContent = c.name;
+        og.appendChild(opt);
+      });
+      select.appendChild(og);
+    });
+  });
+
+  document.getElementById('regForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('formMsg').classList.add('show');
+  });
+</script>
     </main>
 </body>
 </html>
