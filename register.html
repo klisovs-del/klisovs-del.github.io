@@ -1,41 +1,103 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Реєстрація на курс</title>
-    <link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Реєстрація на курс — Cisco Networking Academy</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2711%27 fill=%27%2300BCEB%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/data.js" defer></script>
+<style>
+  .register-page { padding: 60px 0 100px; min-height: calc(100vh - 200px); }
+  .register-shell {
+    background: var(--bg-panel); border:1px solid var(--line); border-radius: var(--radius-lg);
+    padding: 40px; display:grid; grid-template-columns: .8fr 1.2fr; gap: 44px;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .register-info h1 { font-size: 28px; margin-bottom: 14px; }
+  .register-info p { color: var(--text-dim); font-size: 15px; margin-bottom: 22px; }
+  .register-info ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+  .register-info li { display:flex; gap:10px; align-items:flex-start; font-size: 14px; color: var(--text-dim); }
+  .register-info li svg { flex:none; margin-top:2px; width:16px; height:16px; color: var(--ok); }
+
+  .form-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { display:flex; flex-direction:column; gap:7px; width: 100%; } /* Фікс адаптивності */
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size:12.5px; font-family: var(--font-mono); color: var(--text-dim); }
+  
+  /* Додано width: 100% та box-sizing для запобігання overflow */
+  .field input, .field select, .field textarea {
+    width: 100%; box-sizing: border-box; 
+    background: var(--bg-raised); border:1px solid var(--line-strong); color: var(--text);
+    border-radius: 10px; padding: 12px 14px; font-family: var(--font-body); font-size: 14px;
+  }
+  .field textarea { resize: vertical; min-height: 70px; }
+  .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 7l5 5 5-5' stroke='%238B99B8' stroke-width='1.6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position: right 14px center; }
+  
+  .form-note { font-size:12px; color: var(--text-faint); margin-top:14px; }
+  .form-submit { margin-top: 18px; width:100%; }
+  .form-msg { margin-top:14px; font-size:13px; font-family: var(--font-mono); color: var(--ok); display:none; }
+  .form-msg.show { display:block; }
+
+  @media (max-width: 980px) {
+    .register-shell { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .register-shell { padding: 24px; }
+  }
+</style>
 </head>
 <body>
-    <header class="header">
-        <!-- Кнопка повернення (Пункт 5) -->
-        <a href="index.html" class="back-button">⬅ На вибір академії</a>
-        <h1>Реєстрація на курс</h1>
-    </header>
 
-    <main class="container">
-        <form class="registration-form" action="#" method="POST">
-            <div class="form-group">
-                <label for="name">ПІБ:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="course">Оберіть курс:</label>
-                <select id="course" name="course">
-                    <option value="ccna">CCNA: Introduction to Networks</option>
-                    <option value="cyberops">CyberOps Associate</option>
-                    <option value="python">Python Essentials</option>
-                </select>
-            </div>
-            <button type="submit" class="submit-btn">Зареєструватися</button>
-        </form>
-        <script src="assets/script.js"></script>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="cisco.html">
+      <span class="node"><svg viewBox="0 0 24 24" fill="none"><circle cx="4" cy="18" r="2" fill="white"/><circle cx="9" cy="18" r="2" fill="white"/><circle cx="14" cy="18" r="2" fill="white"/><circle cx="19" cy="18" r="2" fill="white"/><circle cx="6.5" cy="11" r="2" fill="white"/><circle cx="11.5" cy="11" r="2" fill="white"/><circle cx="16.5" cy="11" r="2" fill="white"/><circle cx="9" cy="4" r="2" fill="white"/><circle cx="14" cy="4" r="2" fill="white"/></svg></span>
+      <span>CISCO ACADEMY<small>Реєстрація</small></span>
+    </a>
+    <div class="navlinks">
+      <a href="index.html">← Вибір академії</a>
+      <a href="cisco.html">Про академію</a>
+      <a href="catalog.html">Каталог курсів</a>
+    </div>
+    <button class="navtoggle" aria-label="Меню"><span></span></button>
+  </div>
+</nav>
+
+<main class="wrap register-page">
+  <div class="register-shell" data-reveal>
+    <div class="register-info">
+      <div class="eyebrow">ЗАПИС НА НАВЧАННЯ</div>
+      <h1>Реєстрація на курси</h1>
+      <p>Заповніть форму — і ми зв'яжемось з вами для підтвердження та подальших інструкцій щодо старту курсу.</p>
+      <ul>
+        <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Курси доступні студентам ІТС та всім охочим</li>
+        <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Підтвердження — на вказану пошту</li>
+      </ul>
+    </div>
+    <form id="regForm" onsubmit="return false;">
+      <div class="form-grid">
+        <div class="field"><label for="lastname">Прізвище</label><input id="lastname" type="text" required></div>
+        <div class="field"><label for="firstname">Ім'я</label><input id="firstname" type="text" required></div>
+        <div class="field"><label for="uni">ЗВО</label><input id="uni" type="text" placeholder="напр. КПІ ім. Ігоря Сікорського"></div>
+        <div class="field"><label for="faculty">Факультет</label><input id="faculty" type="text" placeholder="напр. ІТС"></div>
+        <div class="field"><label for="email">Електронна пошта</label><input id="email" type="email" required></div>
+        <div class="field"><label for="phone">Номер телефону</label><input id="phone" type="tel"></div>
+        <div class="field full"><label for="course">Оберіть курс</label>
+          <select id="course"><option>-- Оберіть курс --</option></select>
+        </div>
+        <div class="field full"><label for="comments">Додаткові коментарі</label><textarea id="comments" placeholder="Необов'язково"></textarea></div>
+      </div>
+      <button class="btn btn-cisco form-submit" type="submit">Зареєструватись</button>
+      <div class="form-note">Після реєстрації ми зв'яжемося з вами для підтвердження.</div>
+      <div class="form-msg" id="formMsg">✓ Заявку прийнято — очікуйте лист на вказану пошту.</div>
+    </form>
+  </div>
+</main>
+
+<script src="assets/script.js"></script>
 <script>
-  // наповнюємо select курсів на основі каталогу
   window.addEventListener('DOMContentLoaded', () => {
     const select = document.getElementById('course');
     if (typeof COURSES === 'undefined') return;
@@ -60,6 +122,5 @@
     document.getElementById('formMsg').classList.add('show');
   });
 </script>
-    </main>
 </body>
 </html>
