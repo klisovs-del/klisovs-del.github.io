@@ -288,39 +288,7 @@
   </div>
 </section>
 
-<section class="section section-tight" id="register">
-  <div class="wrap">
-    <div class="register-shell" data-reveal>
-      <div class="register-info">
-        <div class="eyebrow">ЗАПИС НА НАВЧАННЯ</div>
-        <h3>Реєстрація на курси CCNA</h3>
-        <p>Заповніть форму — і ми зв'яжемось з вами для підтвердження та подальших інструкцій щодо старту курсу.</p>
-        <ul>
-          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Курси доступні студентам ІТС та всім охочим</li>
-          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Підтвердження — на вказану пошту</li>
-          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Повний список курсів — у каталозі</li>
-        </ul>
-      </div>
-      <form id="regForm" onsubmit="return false;">
-        <div class="form-grid">
-          <div class="field"><label for="lastname">Прізвище</label><input id="lastname" type="text" required></div>
-          <div class="field"><label for="firstname">Ім'я</label><input id="firstname" type="text" required></div>
-          <div class="field"><label for="uni">ЗВО</label><input id="uni" type="text" placeholder="напр. КПІ ім. Ігоря Сікорського"></div>
-          <div class="field"><label for="faculty">Факультет</label><input id="faculty" type="text" placeholder="напр. ІТС"></div>
-          <div class="field"><label for="email">Електронна пошта</label><input id="email" type="email" required></div>
-          <div class="field"><label for="phone">Номер телефону</label><input id="phone" type="tel"></div>
-          <div class="field full"><label for="course">Оберіть курс</label>
-            <select id="course"><option>-- Оберіть курс --</option></select>
-          </div>
-          <div class="field full"><label for="comments">Додаткові коментарі</label><textarea id="comments" placeholder="Необов'язково"></textarea></div>
-        </div>
-        <button class="btn btn-cisco form-submit" type="submit">Зареєструватись</button>
-        <div class="form-note">Після реєстрації ми зв'яжемося з вами для підтвердження.</div>
-        <div class="form-msg" id="formMsg">✓ Заявку прийнято — очікуйте лист на вказану пошту.</div>
-      </form>
-    </div>
-  </div>
-</section>
+<a href="register.html" class="btn-primary">Зареєструватися на курс</a>
 
 <section class="section section-tight" id="privacy">
   <div class="wrap">
@@ -351,32 +319,6 @@
   </div>
 </footer>
 
-<script src="assets/script.js"></script>
-<script>
-  // наповнюємо select курсів на основі каталогу
-  window.addEventListener('DOMContentLoaded', () => {
-    const select = document.getElementById('course');
-    if (typeof COURSES === 'undefined') return;
-    const grouped = {};
-    CATEGORY_ORDER.forEach(c => grouped[c] = []);
-    COURSES.forEach(c => { (grouped[c.category] ||= []).push(c); });
-    Object.entries(grouped).forEach(([cat, list]) => {
-      if (!list.length) return;
-      const og = document.createElement('optgroup');
-      og.label = cat;
-      list.forEach(c => {
-        const opt = document.createElement('option');
-        opt.textContent = c.name;
-        og.appendChild(opt);
-      });
-      select.appendChild(og);
-    });
-  });
 
-  document.getElementById('regForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    document.getElementById('formMsg').classList.add('show');
-  });
-</script>
 </body>
 </html>
