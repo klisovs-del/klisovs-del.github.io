@@ -20,6 +20,7 @@
     padding: 16px 0; margin-top: 30px;
   }
   .toolbar-inner{ display:flex; gap: 16px; align-items:center; flex-wrap:wrap; }
+  .cat-select-mobile{ display:none; }
   .search{
     flex: 1 1 240px; position:relative;
   }
@@ -108,9 +109,29 @@
   }
   .empty-state.show{ display:block; }
 
-  @media (max-width: 640px){
-    .toolbar{ top: 0; }
+  @media (max-width: 720px){
+    .toolbar{ top: 0; padding: 12px 0; }
     .card-grid{ grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); }
+
+    /* compact single-row, horizontally scrollable category chips */
+    .toolbar-inner{ flex-wrap: nowrap; }
+    .search{ flex: 1 1 auto; }
+    .chips{
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      max-width: 40vw;
+    }
+    .chips::-webkit-scrollbar{ display:none; }
+    .chip{ flex: none; padding: 8px 12px; }
+    .chip .n{ display:none; }
+  }
+
+  @media (max-width: 560px){
+    .toolbar-inner{ flex-wrap: wrap; }
+    .search{ flex: 1 1 100%; }
+    .chips{ max-width: 100%; width:100%; }
   }
 </style>
 </head>
@@ -118,6 +139,10 @@
 
 <nav class="topnav">
   <div class="topnav-inner">
+    <a class="back-btn" href="index.html" title="Усі академії">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Усі академії</span>
+    </a>
     <a class="brand" href="cisco.html">
       <span class="node"><svg viewBox="0 0 24 24" fill="none"><circle cx="4" cy="18" r="2" fill="white"/><circle cx="9" cy="18" r="2" fill="white"/><circle cx="14" cy="18" r="2" fill="white"/><circle cx="19" cy="18" r="2" fill="white"/><circle cx="6.5" cy="11" r="2" fill="white"/><circle cx="11.5" cy="11" r="2" fill="white"/><circle cx="16.5" cy="11" r="2" fill="white"/><circle cx="9" cy="4" r="2" fill="white"/><circle cx="14" cy="4" r="2" fill="white"/></svg></span>
       <span>CISCO ACADEMY<small>Каталог курсів</small></span>
@@ -125,7 +150,7 @@
     <div class="navlinks">
       <a href="cisco.html#about">Про нас</a>
       <a href="cisco.html#instructors">Інструктори</a>
-      <a href="cisco.html#register">Реєстрація</a>
+      <a href="register.html">Реєстрація</a>
       <a href="cisco.html" class="cta">← На головну академії</a>
     </div>
     <button class="navtoggle" aria-label="Меню"><span></span></button>

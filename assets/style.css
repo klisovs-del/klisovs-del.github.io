@@ -40,6 +40,7 @@
 *{ box-sizing: border-box; }
 html{ scroll-behavior: smooth; }
 
+html, body{ max-width: 100%; overflow-x: hidden; }
 body{
   margin:0;
   background: var(--bg);
@@ -77,6 +78,9 @@ h1,h2,h3,h4{ font-family: var(--font-display); margin: 0; letter-spacing: -0.01e
   padding: 0 28px;
   position: relative;
   z-index: 1;
+}
+@media (max-width: 480px){
+  .wrap{ padding: 0 18px; }
 }
 
 /* ---------- focus / accessibility ---------- */
@@ -116,13 +120,32 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   border-bottom: 1px solid var(--line);
 }
 .topnav-inner{
-  display:flex; align-items:center; justify-content:space-between;
+  display:flex; align-items:center; gap: 14px;
   max-width: 1180px; margin: 0 auto; padding: 16px 28px;
 }
+.topnav-inner .navlinks{ margin-left: auto; }
+
+/* --- back-to-academies button --- */
+.back-btn{
+  display:flex; align-items:center; gap:7px; flex: none;
+  width: 38px; height:38px; border-radius: 10px;
+  border: 1px solid var(--line-strong); background: var(--bg-panel);
+  color: var(--text-dim); overflow:hidden;
+  transition: all .2s ease;
+}
+.back-btn svg{ width:16px; height:16px; flex:none; margin-left: 10px; }
+.back-btn span{
+  font-family: var(--font-mono); font-size: 12.5px; white-space:nowrap;
+  opacity:0; max-width:0; transition: all .2s ease;
+}
+.back-btn:hover{ width: auto; padding-right: 14px; border-color: var(--cisco); color: var(--text); }
+.back-btn:hover span{ opacity:1; max-width:160px; margin-left: 2px; }
+
 .brand{
-  display:flex; align-items:center; gap:10px;
+  display:flex; align-items:center; gap:10px; min-width:0;
   font-family: var(--font-display); font-weight:700; font-size: 17px;
 }
+.brand span{ min-width:0; overflow:hidden; text-overflow:ellipsis; }
 .brand .node{
   width: 26px; height:26px; border-radius:7px;
   background: linear-gradient(135deg, var(--cisco), var(--cisco-dim));
@@ -217,24 +240,31 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
 
-@media (max-width: 640px) {
-    .toolbar { top: 0; }
-    .card-grid { grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); }
-    
-    /* Нові правила для меню категорій */
-    .toolbar-inner { flex-wrap: nowrap; }
-    .chips { 
-      flex-wrap: nowrap; 
-      overflow-x: auto; 
-      padding-bottom: 8px; 
-      scrollbar-width: none; /* Для Firefox */
-    }
-    .chips::-webkit-scrollbar { display: none; } /* Для Chrome/Safari */
+/* ---------- registration form (shared: cisco preview blocks + register.html) ---------- */
+.field, .field *{ min-width: 0; }
+.field input, .field select, .field textarea{
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 880px){
+  .navlinks{
+    position: fixed; inset: 66px 16px auto 16px;
+    background: var(--bg-panel); border:1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    flex-direction:column; align-items: flex-start; gap: 4px;
+    padding: 10px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.5);
+    transform-origin: top right;
+    transform: scale(.96); opacity:0; visibility:hidden;
+    transition: all .18s ease;
   }
   .navlinks.open{ transform:scale(1); opacity:1; visibility:visible; }
   .navlinks a{ width:100%; padding: 12px 10px; border-radius: 8px; }
   .navlinks a:hover{ background: var(--bg-raised); }
   .navlinks a::after{ display:none; }
   .navlinks a.cta{ text-align:center; margin-top: 4px; }
-  .navtoggle{ display:flex; }
+  .navtoggle{ display:flex; margin-left:auto; }
+  .topnav-inner .navlinks{ margin-left:0; }
 }

@@ -7,7 +7,6 @@
 <meta name="description" content="Акредитована Cisco Networking Academy при Інституті телекомунікаційних систем КПІ ім. Ігоря Сікорського. Курси CCNA, кібербезпека, інструктори, реєстрація.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2711%27 fill=%27%2300BCEB%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/style.css">
-<script src="assets/data.js" defer></script>
 <style>
   /* ---------- hero ---------- */
   .hero{ padding: 76px 0 60px; position:relative; overflow:hidden; }
@@ -85,32 +84,6 @@
   .team-body a{ font-size:12.5px; color: var(--text-faint); }
   .team-body a:hover{ color: var(--cisco); }
 
-  /* ---------- registration ---------- */
-  .register-shell{
-    background: var(--bg-panel); border:1px solid var(--line); border-radius: var(--radius-lg);
-    padding: 40px; display:grid; grid-template-columns: .8fr 1.2fr; gap: 44px;
-  }
-  .register-info h3{ font-size: 24px; margin-bottom: 14px; }
-  .register-info p{ color: var(--text-dim); font-size: 14.5px; margin-bottom: 22px; }
-  .register-info ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
-  .register-info li{ display:flex; gap:10px; align-items:flex-start; font-size: 13.5px; color: var(--text-dim); }
-  .register-info li svg{ flex:none; margin-top:2px; width:16px; height:16px; color: var(--ok); }
-
-  .form-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .field{ display:flex; flex-direction:column; gap:7px; }
-  .field.full{ grid-column: 1 / -1; }
-  .field label{ font-size:12.5px; font-family: var(--font-mono); color: var(--text-dim); }
-  .field input, .field select, .field textarea{
-    background: var(--bg-raised); border:1px solid var(--line-strong); color: var(--text);
-    border-radius: 10px; padding: 12px 14px; font-family: var(--font-body); font-size: 14px;
-  }
-  .field textarea{ resize: vertical; min-height: 70px; }
-  .field select{ appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 7l5 5 5-5' stroke='%238B99B8' stroke-width='1.6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position: right 14px center; }
-  .form-note{ font-size:12px; color: var(--text-faint); margin-top:14px; }
-  .form-submit{ margin-top: 18px; width:100%; }
-  .form-msg{ margin-top:14px; font-size:13px; font-family: var(--font-mono); color: var(--ok); display:none; }
-  .form-msg.show{ display:block; }
-
   /* ---------- privacy ---------- */
   .privacy-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
   .priv-card{ background: var(--bg-panel); border:1px solid var(--line); border-radius: var(--radius-md); padding: 22px; }
@@ -118,16 +91,14 @@
   .priv-card p{ font-size: 13.5px; color: var(--text-dim); margin:0; }
 
   @media (max-width: 980px){
-    .hero-grid, .about-grid, .register-shell{ grid-template-columns: 1fr; }
+    .hero-grid, .about-grid{ grid-template-columns: 1fr; }
     .course-preview-grid{ grid-template-columns: 1fr 1fr; }
     .team-grid{ grid-template-columns: 1fr 1fr; }
     .privacy-grid{ grid-template-columns: 1fr; }
-    .form-grid{ grid-template-columns: 1fr; }
   }
   @media (max-width: 560px){
     .course-preview-grid{ grid-template-columns: 1fr; }
     .team-grid{ grid-template-columns: 1fr; }
-    .register-shell{ padding: 24px; }
   }
 </style>
 </head>
@@ -135,16 +106,20 @@
 
 <nav class="topnav">
   <div class="topnav-inner">
+    <a class="back-btn" href="index.html" title="Усі академії">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Усі академії</span>
+    </a>
     <a class="brand" href="cisco.html">
       <span class="node"><svg viewBox="0 0 24 24" fill="none"><circle cx="4" cy="18" r="2" fill="white"/><circle cx="9" cy="18" r="2" fill="white"/><circle cx="14" cy="18" r="2" fill="white"/><circle cx="19" cy="18" r="2" fill="white"/><circle cx="6.5" cy="11" r="2" fill="white"/><circle cx="11.5" cy="11" r="2" fill="white"/><circle cx="16.5" cy="11" r="2" fill="white"/><circle cx="9" cy="4" r="2" fill="white"/><circle cx="14" cy="4" r="2" fill="white"/></svg></span>
       <span>CISCO ACADEMY<small>ІТС КПІ ім. Ігоря Сікорського</small></span>
     </a>
     <div class="navlinks">
-      <a href="index.html">← Вибір академії</a>
-      <a href="cisco.html#about">Про нас</a>
-      <a href="cisco.html#instructors">Інструктори</a>
-      <a href="register.html">Реєстрація</a>
-      <a href="cisco.html" class="cta">На головну Cisco →</a>
+      <a href="#about">Про нас</a>
+      <a href="#courses">Курси</a>
+      <a href="#instructors">Інструктори</a>
+      <a href="#privacy">Конфіденційність</a>
+      <a href="register.html" class="cta">Реєстрація →</a>
     </div>
     <button class="navtoggle" aria-label="Меню"><span></span></button>
   </div>
@@ -156,10 +131,10 @@
       <div class="eyebrow"><span class="dot"></span> АКРЕДИТОВАНА CISCO NETWORKING ACADEMY</div>
       <h1>Мережеві навички,<br>що ведуть до <em>CCNA</em>.</h1>
       <p class="lead">Готуємо студентів ІТС та всіх охочих до кар'єри в мережевих технологіях і кібербезпеці — від перших пакетів до сертифікації Cisco Certified Network Associate.</p>
-<div class="hero-cta">
-  <a href="catalog.html" class="btn btn-cisco">Переглянути каталог курсів</a>
-  <a href="register.html" class="btn btn-ghost">Зареєструватись на курс</a>
-</div>
+      <div class="hero-cta">
+        <a href="catalog.html" class="btn btn-cisco">Переглянути каталог курсів</a>
+        <a href="register.html" class="btn btn-ghost">Зареєструватись на курс</a>
+      </div>
       <div class="hero-stats">
         <div class="stat"><b>82+</b><span>КУРСИ NETACAD</span></div>
         <div class="stat"><b>7</b><span>НАПРЯМІВ ПІДГОТОВКИ</span></div>
@@ -286,7 +261,7 @@
     </div>
   </div>
 </section>
-  
+
 <section class="section section-tight" id="privacy">
   <div class="wrap">
     <div class="section-head">
@@ -304,18 +279,31 @@
   </div>
 </section>
 
+<section class="section-tight">
+  <div class="wrap">
+    <div class="catalog-cta" data-reveal>
+      <div>
+        <h3>Готові розпочати навчання?</h3>
+        <p>Заповніть коротку форму реєстрації — і ми зв'яжемось щодо старту курсу.</p>
+      </div>
+      <a href="register.html" class="btn btn-cisco">Зареєструватись на курс →</a>
+    </div>
+  </div>
+</section>
+
 <footer class="site-footer">
   <div class="wrap">
     <div class="fmeta">© 2026 Cisco Networking Academy · НН ІТС КПІ ім. Ігоря Сікорського</div>
     <div class="flinks">
       <a href="index.html">← Усі академії</a>
       <a href="catalog.html">Каталог курсів</a>
+      <a href="register.html">Реєстрація</a>
       <a href="https://its.kpi.ua" target="_blank" rel="noopener">its.kpi.ua</a>
       <a href="#privacy">Конфіденційність</a>
     </div>
   </div>
 </footer>
 
-
+<script src="assets/script.js"></script>
 </body>
 </html>
